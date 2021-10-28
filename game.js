@@ -4,7 +4,9 @@ const ROCK = "rock",
     ERROR = "error";
 const ROUNDS = 5;
 
-game();
+const BUTTONS = document.querySelectorAll("button");
+
+let score = [0, 0];
 
 function computerPlay() {
     let selection = "";
@@ -67,18 +69,7 @@ function roundResult(result) {
     return message;
 }
 
-function askInput(message) {
-    return prompt(message).toLowerCase();
-}
 
-function checkInput(input) {
-    let check = false;
-    if (input === ROCK || input === PAPER || input === SCISSORS) {
-        check = true;
-    }
-
-    return check;
-}
 
 function showScore(score) {
     console.log(`PLAYER: ${score[0]}\nCOMPUTER: ${score[1]}`);
@@ -92,38 +83,90 @@ function showWinner(score) {
     }
 }
 
-function game() {
-    let input = "";
+function startRound(playerSelection) {
+    //let input = "";
     let result = -1;
-    let score = [0, 0];
-    console.log("Game starts");
-    for (let i = 0; i < ROUNDS; i++) {
-        input = askInput("What do you choose? Rock, paper or scissors?");
-        if (!checkInput(input)) {
-            input = "error";
-        }
+    //let score = [0, 0];
 
-        result = playRound(input, computerPlay());
-        switch (result){
-            case 1:
-                score[0]++;
-                break;
-            case 2:
-                score[1]++;
-                break;
-            case -1: 
-            case 0:
-            //Repeating round
-                i--;
-                break;
-            default: 
-                break;
-        }
+    //for (let i = 0; i < ROUNDS; i++) {
+        //input = askInput("What do you choose? Rock, paper or scissors?");
+        //if (!checkInput(input)) {
+        //    input = "error";
+        //}}
 
-        console.log(roundResult(result));
-        showScore(score);
+    result = playRound(playerSelection, computerPlay());
+    switch (result){
+        case 1:
+            score[0]++;
+            break;
+        case 2:
+            score[1]++;
+            break;
+        case -1: 
+        case 0:
+        //Repeating round
+            break;
+        default: 
+            break;
     }
 
-    showWinner(score);
-    
+    console.log(roundResult(result));
+    showScore();
+    if(checkScore()) {
+        showWinner();
+        //Hide buttons
+    }    
 }
+//TODO button reset
+function checkScore() {
+    let ended = false;
+    if (score[0] === 5 || score[1] === 5) {
+        ended = true;
+    }
+
+    return ended;
+}
+
+function resetGame() {
+    //TODO
+}
+
+BUTTONS.forEach(button => {
+    button.addEventListener('click', (e) => {
+        startRound(e);
+    });
+});
+
+function selectButton(button) {
+    let selection = "ERROR";
+
+    switch(button.target.id) {
+        case 'butRock':
+            selection = ROCK;
+            break;
+        case 'butPaper':
+            selection = PAPER;
+            break;
+        case 'butScissors':
+            selection = SCISSORS;
+            break;
+        default:break;
+    }
+
+    return selection;
+}
+
+/* NOT ON USE
+function askInput(message) {
+    return prompt(message).toLowerCase();
+}
+
+function checkInput(input) {
+    let check = false;
+    if (input === ROCK || input === PAPER || input === SCISSORS) {
+        check = true;
+    }
+
+    return check;
+}
+*/
