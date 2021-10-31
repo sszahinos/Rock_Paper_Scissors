@@ -12,13 +12,30 @@
         <h1>ROCK, PAPER, SCISSORS</h1>
         <h2>Are you lucky enough to beat AI?</h2>
     </header>
-    <div class="buttons">
-        <button id="butRock">ROCK</button>
-        <button id="butPaper">PAPER</button>
-        <button id="butScissors">SCISSORS</button>
+    <div class="gameMainDiv">
+        <div class="gameButtons">
+            <button id="butRock" class="butGame"><img src="./res/rock.png" alt="rock"/></button>
+            <button id="butPaper" class="butGame"><img src="./res/paper.png" alt="paper"/></button>
+            <button id="butScissors" class="butGame"><img src="./res/scissors.png" alt="scissors"/></button>
+        </div>  
+        <p>VS.</p>
+        <div class="pcGame">
+            <div class="container"><img src="./res/rock.png" alt="rock"/></div>
+        </div>
     </div>
     <div class="result">
-        <p>result</p>
+        <div class="scorePannel">
+            <div>
+                <h2>PLAYER</h2>
+                <p id="playerScore">0</p>
+            </div>
+            <div>
+                <h2>PC</h2>
+                <p id="pcScore">0</p>
+            </div>
+        </div>
+        <p id="resultMsg">result</p>
+        <button id="butReset" class="button">Try again</button>
     </div>
 </body>
 <script src="game.js"></script>

@@ -4,31 +4,59 @@ const ROCK = "rock",
     ERROR = "error";
 const ROUNDS = 5;
 
-const BUTTONS = document.querySelectorAll("button");
+const BUTTONS = document.querySelectorAll(".butGame");
+const RESET_BUTTON = document.querySelector("#butReset");
+
+const GAME_MAIN_DIV = document.querySelector(".gameMainDiv");
+const RESULT_P = document.querySelector("#resultMsg");
+const SCORE_P = [
+    document.querySelector("#playerScore"),
+    document.querySelector("#pcScore")
+];
 
 let score = [0, 0];
 
-function computerPlay() {
-    let selection = "";
 
-    switch (Math.floor(Math.random() * 3)) {
-        case 0: 
-            selection = ROCK;
-            break;
+BUTTONS.forEach(button => {
+    button.addEventListener('click', (e) => {
+        startRound(selectButton(e));
+    });
+});
+
+RESET_BUTTON.addEventListener('click', (e) => resetGame());
+
+function startRound(playerSelection) {
+    let result = -1;
+
+    console.log("Player select: " + playerSelection);
+    result = findWinner(playerSelection, computerPlay());
+    switch (result){
         case 1:
-            selection = PAPER;
+            score[0]++;
             break;
         case 2:
-            selection = SCISSORS;
+            score[1]++;
             break;
-        default:
+        case -1: 
+        case 0:
+        //Repeating round
+            break;
+        default: 
             break;
     }
-    console.log(`PC chooses: ${selection}`);
-    return selection;
+
+    console.log(roundResult(result));
+    RESULT_P.style.display = "flex";
+    RESULT_P.innerHTML = roundResult(result);
+    
+    updateScore();
+
+    if(checkScore()) {
+        showWinner();
+    }    
 }
 
-function playRound(playerSelection, computerSelection) {
+function findWinner(playerSelection, computerSelection) {
     console.log("Round starts");
     let result = -1;
     if (playerSelection === ERROR) {    
@@ -54,13 +82,13 @@ function roundResult(result) {
             message = "It's a tie. Try again.";
             break;
         case 1:
-            message = "You win! Congratulations!!";
+            message = "You win!";
             break;
         case 2:
             message = "Oh, you missed that...";
             break;
         case -1:
-            message = "You need to choose rock paper or scissors. Try again."
+            message = "You must choose rock paper or scissors. Try again."
             break;
         default:
             break;
@@ -69,55 +97,26 @@ function roundResult(result) {
     return message;
 }
 
-
-
-function showScore(score) {
+function updateScore() {
     console.log(`PLAYER: ${score[0]}\nCOMPUTER: ${score[1]}`);
+    SCORE_P[0].innerHTML = score[0];
+    SCORE_P[1].innerHTML = score[1]; 
 }
 
-function showWinner(score) {
+function showWinner() {
     if (score[0] > score [1]) {
-        console.log("You WIN!!!")
+        msg = "You have WON!!! Congratulations!!";
     } else {
-        console.log("You loose...")
-    }
-}
-
-function startRound(playerSelection) {
-    //let input = "";
-    let result = -1;
-    //let score = [0, 0];
-
-    //for (let i = 0; i < ROUNDS; i++) {
-        //input = askInput("What do you choose? Rock, paper or scissors?");
-        //if (!checkInput(input)) {
-        //    input = "error";
-        //}}
-
-    result = playRound(playerSelection, computerPlay());
-    switch (result){
-        case 1:
-            score[0]++;
-            break;
-        case 2:
-            score[1]++;
-            break;
-        case -1: 
-        case 0:
-        //Repeating round
-            break;
-        default: 
-            break;
+        msg = "You have lost...";
     }
 
-    console.log(roundResult(result));
-    showScore();
-    if(checkScore()) {
-        showWinner();
-        //Hide buttons
-    }    
+    RESULT_P.innerHTML = msg;
+    
+    GAME_MAIN_DIV.style.display = "none";  
+    RESULT_P.style.display = "flex";
+    RESET_BUTTON.style.display = "flex";
 }
-//TODO button reset
+
 function checkScore() {
     let ended = false;
     if (score[0] === 5 || score[1] === 5) {
@@ -128,14 +127,14 @@ function checkScore() {
 }
 
 function resetGame() {
-    //TODO
+    score[0] = 0;
+    score[1] = 0;
+    updateScore();
+    GAME_MAIN_DIV.style.display = "flex";  
+    RESULT_P.style.display = "none";
+    RESET_BUTTON.style.display = "none";
+    
 }
-
-BUTTONS.forEach(button => {
-    button.addEventListener('click', (e) => {
-        startRound(e);
-    });
-});
 
 function selectButton(button) {
     let selection = "ERROR";
@@ -155,6 +154,27 @@ function selectButton(button) {
 
     return selection;
 }
+
+function computerPlay() {
+    let selection = "";
+
+    switch (Math.floor(Math.random() * 3)) {
+        case 0: 
+            selection = ROCK;
+            break;
+        case 1:
+            selection = PAPER;
+            break;
+        case 2:
+            selection = SCISSORS;
+            break;
+        default:
+            break;
+    }
+    console.log(`PC chooses: ${selection}`);
+    return selection;
+}
+
 
 /* NOT ON USE
 function askInput(message) {

@@ -1,6 +1,8 @@
 * {
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: auto;
 }
 
 body {
@@ -22,5 +24,68 @@ h1 {
 h2 {
     font-size: 3em;
 }
+
+.gameMainDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 15vw;
+    max-height: 5vw;
+    max-width: 75vw;
+    gap: 50px;
+    background-color: coral;
+}
+
+.gameButtons, .pcGame {
+    display: flex;
+    height: 100%;
+    width: 33.33%;
+    justify-content: space-between;
+}
+
+.gameMainDiv p {
+    width: auto;
+    font-size: 3rem;
+}
+
+.pcGame {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.pcGame .container {
+    width: 33.33%;
+    height: 100%;
+}
+
+.butGame img, .container img {
+    width: 100%;
+    height: 100%;
+}
+
+#resultMsg, #butReset {
+    display: none;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scorePannel {
+    display: flex;
+    flex-direction: row;
+    gap: 20vw;
+}
+
+.scorePannel div {
+    display: inherit;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 
