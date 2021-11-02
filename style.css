@@ -34,7 +34,6 @@ h2 {
     max-height: 5vw;
     max-width: 75vw;
     gap: 50px;
-    background-color: coral;
 }
 
 .gameButtons, .pcGame {
@@ -60,7 +59,7 @@ h2 {
     height: 100%;
 }
 
-.butGame img, .container img {
+.butGame img, .pcSelection img {
     width: 100%;
     height: 100%;
 }
@@ -73,6 +72,12 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 75vw;
+}
+
+.result p {
+    text-align: center;
+    font-size: 5rem;
 }
 
 .scorePannel {
@@ -86,6 +91,8 @@ h2 {
     flex-direction: column;
     align-items: center;
 }
+
+
 
 
 
