@@ -138,6 +138,7 @@ function resetGame() {
     score[0] = 0;
     score[1] = 0;
     updateScore();
+    resetSelection();
     GAME_MAIN_DIV.style.display = "flex";  
     RESULT_DIV.style.display = "none";
     /*RESULT_P.style.display = "none";
