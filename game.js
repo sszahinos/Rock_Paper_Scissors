@@ -5,21 +5,26 @@ const ROCK = "rock",
 const ROUNDS = 5;
 
 const BUTTONS = document.querySelectorAll(".butGame");
-const RESET_BUTTON = document.querySelector("#butReset");
+const PC_SELECT = document.querySelectorAll(".pcSelection");
 
 const GAME_MAIN_DIV = document.querySelector(".gameMainDiv");
-const RESULT_P = document.querySelector("#resultMsg");
+
 const SCORE_P = [
     document.querySelector("#playerScore"),
     document.querySelector("#pcScore")
 ];
+
+const RESULT_DIV = document.querySelector(".resultDiv");
+const RESULT_P = document.querySelector("#resultMsg");
+const RESET_BUTTON = document.querySelector("#butReset");
 
 let score = [0, 0];
 
 
 BUTTONS.forEach(button => {
     button.addEventListener('click', (e) => {
-        startRound(selectButton(e));
+        resetSelection();
+        startRound(selectButton(button));
     });
 });
 
@@ -46,7 +51,9 @@ function startRound(playerSelection) {
     }
 
     console.log(roundResult(result));
-    RESULT_P.style.display = "flex";
+    RESULT_DIV.style.display = "flex";
+    RESULT_P.style.display = "inline";
+    RESET_BUTTON.style.display = "none";
     RESULT_P.innerHTML = roundResult(result);
     
     updateScore();
@@ -113,8 +120,9 @@ function showWinner() {
     RESULT_P.innerHTML = msg;
     
     GAME_MAIN_DIV.style.display = "none";  
-    RESULT_P.style.display = "flex";
-    RESET_BUTTON.style.display = "flex";
+    RESULT_DIV.style.display = "flex";
+    /*RESULT_P.style.display = "flex";*/
+    RESET_BUTTON.style.display = "inline";
 }
 
 function checkScore() {
@@ -131,15 +139,16 @@ function resetGame() {
     score[1] = 0;
     updateScore();
     GAME_MAIN_DIV.style.display = "flex";  
-    RESULT_P.style.display = "none";
-    RESET_BUTTON.style.display = "none";
+    RESULT_DIV.style.display = "none";
+    /*RESULT_P.style.display = "none";
+    RESET_BUTTON.style.display = "none";*/
     
 }
 
 function selectButton(button) {
     let selection = "ERROR";
 
-    switch(button.target.id) {
+    switch(button.id) {
         case 'butRock':
             selection = ROCK;
             break;
@@ -157,22 +166,33 @@ function selectButton(button) {
 
 function computerPlay() {
     let selection = "";
-
+    
     switch (Math.floor(Math.random() * 3)) {
         case 0: 
             selection = ROCK;
+            PC_SELECT[0].classList.add("selected");
             break;
         case 1:
             selection = PAPER;
+            PC_SELECT[1].classList.add("selected");
             break;
         case 2:
             selection = SCISSORS;
+            PC_SELECT[2].classList.add("selected");
             break;
         default:
             break;
     }
     console.log(`PC chooses: ${selection}`);
+    
     return selection;
+}
+
+function resetSelection() {
+    PC_SELECT.forEach(element => {
+        console.log("reset");
+        element.classList.remove("selected");
+    });
 }
 
 

@@ -21,9 +21,9 @@
         <p>VS.</p>
         <div class="pcGame">
             <!--<div class="container"><img id="pcGameImg" src="./res/rock.png" alt="rock"/></div>-->
-            <div class="pcSelection"><img id="pcGameImg" src="./res/rock.png" alt="rock"/></div>
-            <div class="pcSelection"><img id="pcGameImg" src="./res/paper.png" alt="rock"/></div>
-            <div class="pcSelection"><img id="pcGameImg" src="./res/scissors.png" alt="rock"/></div>
+            <div class="pcSelection" id="pcRock"><img src="./res/rock.png" alt="rock"/></div>
+            <div class="pcSelection" id="pcPaper"><img src="./res/paper.png" alt="rock"/></div>
+            <div class="pcSelection" id="pcScissors"><img src="./res/scissors.png" alt="rock"/></div>
         </div>
     </div>
     <div class="result">
@@ -37,9 +37,14 @@
                 <p id="pcScore">0</p>
             </div>
         </div>
-        <p id="resultMsg">result</p>
-        <button id="butReset" class="button">Try again</button>
+        <div class="resultDiv">
+            <p id="resultMsg">result</p>
+            <button id="butReset" class="button">Try again</button>
+        </div>
     </div>
+    <footer style="margin-top: 200px; text-align: right;">
+        <div>Pending better styling. This is so ugly</div>
+    </footer>
 </body>
 <script src="game.js"></script>
 </html>

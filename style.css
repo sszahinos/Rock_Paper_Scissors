@@ -1,6 +1,6 @@
 * {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     width: 100%;
     height: auto;
 }
@@ -23,6 +23,10 @@ h1 {
 
 h2 {
     font-size: 3em;
+}
+
+header,  .gameMainDiv{
+    margin-bottom: 5vw;
 }
 
 .gameMainDiv {
@@ -64,10 +68,6 @@ h2 {
     height: 100%;
 }
 
-#resultMsg, #butReset {
-    display: none;
-}
-
 .result {
     display: flex;
     flex-direction: column;
@@ -90,6 +90,48 @@ h2 {
     display: inherit;
     flex-direction: column;
     align-items: center;
+}
+
+
+.resultDiv {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#butReset {
+    display: none;
+    width: 25%;
+    height: 5vw;
+    font-size: 2rem;
+    line-height: 5vw;
+    text-align: center;
+}
+
+#resultMsg {
+    display: inline;
+    text-align: center;
+}
+
+.selected {
+    animation-name: pump;
+    animation-duration: 1s;
+}
+
+@keyframes pump {
+    from {
+        transform: scale(1);
+        border-style: solid;
+        border-color: coral;
+    }
+
+    to {
+        transform:scale(2);
+        border-style: solid;
+        border-color: coral;
+    }
 }
 
 
