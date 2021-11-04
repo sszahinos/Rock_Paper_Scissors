@@ -54,7 +54,7 @@ function startRound(playerSelection) {
     RESULT_DIV.style.display = "flex";
     RESULT_P.style.display = "inline";
     RESET_BUTTON.style.display = "none";
-    RESULT_P.innerHTML = roundResult(result);
+    RESULT_P.textContent = roundResult(result);
     
     updateScore();
 
@@ -106,8 +106,8 @@ function roundResult(result) {
 
 function updateScore() {
     console.log(`PLAYER: ${score[0]}\nCOMPUTER: ${score[1]}`);
-    SCORE_P[0].innerHTML = score[0];
-    SCORE_P[1].innerHTML = score[1]; 
+    SCORE_P[0].textContent = score[0];
+    SCORE_P[1].textContent = score[1]; 
 }
 
 function showWinner() {
@@ -117,7 +117,7 @@ function showWinner() {
         msg = "You have lost...";
     }
 
-    RESULT_P.innerHTML = msg;
+    RESULT_P.textContent = msg;
     
     GAME_MAIN_DIV.style.display = "none";  
     RESULT_DIV.style.display = "flex";
